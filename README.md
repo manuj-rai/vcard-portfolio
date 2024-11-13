@@ -29,5 +29,5 @@ git clone https://github.com/manuj-rai/Vcard-Portfolio.git
 
 ## Contact
 
-If you want to contact me you can reach me at [LinkedIn](https://www.linkedin.com/in/manuj_rai).
+If you want to contact me you can reach me at [LinkedIn](https://www.linkedin.com/in/manujrai/).
 
