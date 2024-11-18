@@ -134,7 +134,20 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+// Map fullscreen toggle
+function toggleFullScreen() {
+  const mapbox = document.querySelector('.mapbox');
 
+  if (mapbox) {
+    if (mapbox.classList.contains('fullscreen')) {
+      mapbox.classList.remove('fullscreen');
+    } else {
+      mapbox.classList.add('fullscreen');
+    }
+  } else {
+    console.error("Element with class 'mapbox' not found.");
+  }
+}
 
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
