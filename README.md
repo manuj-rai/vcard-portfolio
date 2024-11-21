@@ -3,7 +3,7 @@
 vCard is a fully responsive personal portfolio website, responsive for all devices, built using HTML, CSS, and JavaScript.
 
 ## Demo
-[Live](https://manuj-rai.github.io/Vcard-Portfolio/)
+[Live](https://manuj-rai.github.io/vcard-portfolio/)
 
 ## Prerequisites
 
