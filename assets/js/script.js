@@ -153,10 +153,33 @@ function toggleFullScreen() {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
+// Function to set the active page from localStorage
+function setActivePage() {
+  // Retrieve the saved active page from localStorage
+  const savedPage = localStorage.getItem("activePage");
+
+  if (savedPage) {
+    // Iterate over the pages to find the one matching the saved page
+    for (let i = 0; i < pages.length; i++) {
+      if (savedPage === pages[i].dataset.page) {
+        pages[i].classList.add("active");
+        navigationLinks[i].classList.add("active");
+        window.scrollTo(0, 0);
+      } else {
+        pages[i].classList.remove("active");
+        navigationLinks[i].classList.remove("active");
+      }
+    }
+  }
+}
+
+// Add event listener to all nav links
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
+    // Save the active page to localStorage
+    localStorage.setItem("activePage", this.innerHTML.toLowerCase());
 
+    // Activate the corresponding page
     for (let i = 0; i < pages.length; i++) {
       if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
@@ -167,9 +190,11 @@ for (let i = 0; i < navigationLinks.length; i++) {
         navigationLinks[i].classList.remove("active");
       }
     }
-
   });
 }
+
+// Initialize the active page from localStorage when the page loads
+setActivePage();
 
 // Blog modal variables
 const blogItems = document.querySelectorAll("[data-blog-item]"); // Blog post items
