@@ -1150,6 +1150,7 @@ main {
   opacity: 0;
   transition: var(--transition-1);
   z-index: 2;
+  max-width: 800px;
 }
 
 .blog-image {
