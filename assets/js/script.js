@@ -170,3 +170,48 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+// Blog modal variables
+const blogItems = document.querySelectorAll("[data-blog-item]"); // Blog post items
+const blogModalContainer = document.querySelector("[data-blog-modal-container]"); // Blog modal container
+const blogModalCloseBtn = document.querySelector("[data-blog-modal-close-btn]"); // Modal close button
+const blogOverlay = document.querySelector("[data-blog-overlay]"); // Modal overlay
+
+// Modal content variables
+const blogModalImg = document.querySelector("[data-blog-modal-img]"); // Blog modal image
+const blogModalTitle = document.querySelector("[data-blog-modal-title]"); // Blog modal title
+const blogModalDate = document.querySelector("[data-blog-modal-date]"); // Blog modal date
+const blogModalText = document.querySelector("[data-blog-modal-text]"); // Blog modal content text
+
+// Function to toggle modal visibility
+const toggleBlogModal = function () {
+  blogModalContainer.classList.toggle("active");
+  blogOverlay.classList.toggle("active");
+};
+
+// Add click event listener to all blog items
+blogItems.forEach(item => {
+  item.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default behavior of the link
+
+    // Extract content from the clicked blog post
+    const blogImgSrc = this.querySelector("img").src;
+    const blogTitleText = this.querySelector(".blog-item-title").textContent;
+    const blogDateText = this.querySelector("time").textContent;
+    const blogText = this.querySelector(".blog-text").textContent;
+
+    // Populate the modal with the extracted data
+    blogModalImg.src = blogImgSrc;
+    blogModalImg.alt = blogTitleText;
+    blogModalTitle.textContent = blogTitleText;
+    blogModalDate.textContent = blogDateText;
+    blogModalText.innerHTML = blogText;
+
+    // Show the modal
+    toggleBlogModal();
+  });
+});
+
+// Close modal when close button or overlay is clicked
+blogModalCloseBtn.addEventListener("click", toggleBlogModal);
+blogOverlay.addEventListener("click", toggleBlogModal);

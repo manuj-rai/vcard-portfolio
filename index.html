@@ -925,35 +925,47 @@
 
           <ul class="blog-posts-list">
 
-            <li class="blog-post-item">
+            <li class="blog-post-item" data-blog-item>
               <a href="#">
-
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-1.jpg" alt="Portfolio Struggles" loading="lazy">
                 </figure>
-
                 <div class="blog-content">
-
                   <div class="blog-meta">
                     <p class="blog-category">Design</p>
-
                     <span class="dot"></span>
-
                     <time datetime="2024-12-23">Dec 23, 2024</time>
                   </div>
-
                   <h3 class="h3 blog-item-title">Portfolio Struggles</h3>
+                  <p class="blog-text" style="display: none;">Love them. Hate them. Or just disagree with them. There’s no denying that portfolios have become an active part of the recruitment process. I’ve seen more and more recruiters and job applications ask for them.
 
-                  <p class="blog-text">
-                    Tips and insights to make your portfolio journey
-                  </p>
-
+                    At our Content Design and UX meetups, more and more folks have asked what to include in their portfolios and if they need one. I think the question isn’t whether or not you need one but how to use a portfolio to make yours stand out.
+                    
+                    But really, what is a portfolio?
+                    I guess you could say that a portfolio is a representation of your work, showcasing what you can do, how you approach design thinking, how well you work as part of a team, and your contributions.
+                    
+                    In simple terms, a portfolio is a snapshot of your journey. It’s a way to say,
+                    
+                    This is who I am, and this is what I can bring to the table.
+                    
+                    The struggle
+                    I’m going to be honest with you. I’ve struggled with my portfolio. As a designer from a content design background, I’ll admit that I wasn’t even sure I needed one.
+                    
+                    To me, portfolios have always been more associated with the visual side of UX design. I mean, don’t get me wrong. Content is a crucial part of user experience; I just found myself wondering,
+                    
+                    Does a content designer really need a portfolio?
+                    
+                    And as I grappled with this notion of building a portfolio, I was flooded with questions. Questions like;
+                    
+                    Where do I start?
+                    What should I include?
+                    And why should I invest so much time in a document that might only get five minutes of attention?
+                    As someone who’s been on the other side of recruitment, reviewing portfolios as a hiring manager, I can honestly say I’ve only spent five minutes skimming through them — not because they weren’t interesting, but because I was more focused on the person applying for the role. Who are they? How do they approach tasks? Are they a good fit for the team? But that’s just me.</p>
                 </div>
-
               </a>
             </li>
 
-            <li class="blog-post-item">
+            <li class="blog-post-item" data-blog-item>
               <a href="#">
 
                 <figure class="blog-banner-box">
@@ -972,8 +984,28 @@
 
                   <h3 class="h3 blog-item-title">The Battle of Hasting: Spinners or Skeletons</h3>
 
-                  <p class="blog-text">
-                    This article describes how to identify intermediate states while loading using React Suspense.
+                  <p class="blog-text" style="display: none;">
+                    Every modern app needs to load data from a server. This may take a while, and making our users wait on a blank screen just won’t do.
+
+                    Now comes the choice — loading spinner or loading skeleton.
+
+                    Most of the time, a loading spinner might be the first thing you use, because it’s easy to implement and straightforward.
+
+                    As the app grows, data fetching gets more and more complex. And in the end, you are left with thousands of spinners all over the place.
+                   
+                    Showing more than one loading spinner gives the user too many places to look at once. The first solution which comes to mind might be unifying all these spinner under a single one. This works well when fetching doesn’t take too long.
+
+                    When it takes longer, the better solution would be to render a loading skeleton. The advantage of a skeleton is that it resembles the final state of the UI after loading, giving the user an idea of where the information will be shown.
+                  
+                    If you were hoping that using skeletons everywhere is the solution, unfortunately that is not the case. Both options — the spinner and the skeleton — can be used. However, which one you decide to use depends on how long the content takes to load.
+
+                    When the content loads fast, showing a skeleton for a very short period of time brings a user no value. Additionally, skeletons need to be specifically crafted for every use case, which means they take more effort than using a loading spinner.
+                    
+                    In our app we noticed three cases:
+                    
+                    🏎 certain parts of application loaded so fast that the loading spinner just blinked through. In such cases there was no point even showing the spinner at all.
+                    🚙 other parts loaded reasonably fast making them ideal for just a loading spinner
+                    🐢 larger pages took a longer time to load, making them great candidates for a skeleton
                   </p>
 
                 </div>
@@ -1099,9 +1131,29 @@
 
       </article>
 
+      <!-- Blog Modal Structure -->
+      <div class="blog-modal-container" data-blog-modal-container>
+        <div class="blog-overlay" data-blog-overlay></div>
 
+        <section class="blog-modal-content-wrapper">
+          <button class="blog-modal-close-btn" data-blog-modal-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
 
+          <div class="blog-modal-img-wrapper" style="display: none;">
+            <figure class="blog-modal-avatar-box">
+              <img class="blog-image" src="" alt="" width="80" data-blog-modal-img>
+            </figure>
+          </div>
 
+          <div class="blog-modal-content">
+            <h4 class="h3 blog-modal-title" data-blog-modal-title></h4>
+            <time datetime="" data-blog-modal-date></time>
+            <div class="blog-text" data-blog-modal-text><p></p>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <!--
         - #CONTACT
