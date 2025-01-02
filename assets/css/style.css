@@ -1151,6 +1151,14 @@ main {
   transition: var(--transition-1);
   z-index: 2;
   max-width: 800px;
+  max-height: 400px;
+  overflow-y: scroll;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Firefox */
+}
+
+.blog-modal-content-wrapper::-webkit-scrollbar {
+  display: none;  /* Hide the scrollbar */
 }
 
 .blog-image {
