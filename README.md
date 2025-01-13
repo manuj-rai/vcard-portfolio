@@ -4,7 +4,7 @@
 
 ## Demo
 Check out the live demo of the vCard portfolio here:  
-[Live Demo](https://manuj-rai.github.io/vcard-portfolio/)
+[Live Demo](https://manuj-rai-portfolio.vercel.app)
 
 ## Preview
 ![vCard Portfolio Preview](./assets/images/vcard-portfolio.png)
