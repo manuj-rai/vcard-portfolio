@@ -2,34 +2,9 @@
 
 **vCard** is a fully responsive personal portfolio website, optimized for all devices. Built using HTML, CSS, and JavaScript, it showcases your skills, projects, and provides a way for people to contact you.
 
-## Demo
-Check out the live demo of the vCard portfolio here:  
-[Live Demo](https://manuj-rai-portfolio.vercel.app)
-
 ## Preview
-![vCard Portfolio Preview](./assets/images/vcard-portfolio.png)
+[![vCard Portfolio Preview](./assets/images/vcard-portfolio.png)](https://manuj-rai-portfolio.vercel.app/)
 
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-* [Git](https://git-scm.com/downloads) must be installed on your operating system.
-
-## Installation
-
-### Clone the Repository
-
-Linux and macOS:
-
-```bash
-sudo git clone https://github.com/manuj-rai/vcard-portfolio.git
-```
-
-Windows:
-
-```bash
-git clone https://github.com/manuj-rai/vcard-portfolio.git
-```
 
 ## Features
 
