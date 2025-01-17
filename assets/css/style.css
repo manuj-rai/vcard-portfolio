@@ -1151,7 +1151,7 @@ main {
   transition: var(--transition-1);
   z-index: 2;
   max-width: 800px;
-  max-height: 400px;
+  max-height: 70vh;
   overflow-y: scroll;
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: transparent transparent; /* Firefox */
@@ -1216,6 +1216,8 @@ main {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
+  max-height: 60vh;
+  overflow: scroll;
 }
 
 
