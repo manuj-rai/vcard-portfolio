@@ -75,7 +75,7 @@ function showIosInstallMessage() {
   // Remove the custom pop-up after 5 seconds
   setTimeout(() => {
       installPopup.remove();
-  }, 2000); // Adjust time as needed
+  }, 5000); // Adjust time as needed
 }
 
 
