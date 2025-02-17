@@ -5,8 +5,8 @@
     "description": "Manuj Rai's full-stack development portfolio",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#000",
-    "theme_color": "#000",
+    "background_color": "hsl(0, 0%, 7%);",
+    "theme_color": "hsl(0, 0%, 7%);",
     "icons": [
       {
         "src": "/assets/images/android-chrome-192x192.png",
