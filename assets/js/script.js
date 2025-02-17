@@ -7,6 +7,8 @@ if ('serviceWorker' in navigator) {
     .catch((error) => console.log('Service Worker Registration Failed:', error));
 }
 
+
+// function to install app
 let deferredPrompt;
 
 // Listen for the install prompt event
@@ -15,10 +17,20 @@ window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault(); // Prevent the default prompt
     deferredPrompt = event;
 
+    // Check if on iOS
+    if (isIos()) {
+        showIosInstallMessage();
+    }
+
     // Show the custom message after some interaction (e.g., first scroll or touch)
     document.body.addEventListener("click", showCustomInstallMessage, { once: true });
     document.body.addEventListener("scroll", showCustomInstallMessage, { once: true });
 });
+
+// Function to check if it's an iOS device
+function isIos() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
 
 // Function to show a custom message
 function showCustomInstallMessage() {
@@ -48,6 +60,23 @@ function showCustomInstallMessage() {
     }, 1000); // Adjust this delay as needed (1 second)
 }
 
+// Function to show a custom iOS install message
+function showIosInstallMessage() {
+  const installPopup = document.createElement("div");
+  installPopup.innerHTML = `
+      <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+                  background: black; color: white; padding: 15px; border-radius: 5px;
+                  text-align: center; z-index: 1000;">
+          <p>To install this app, tap the Share button and select "Add to Home Screen".</p>
+      </div>
+  `;
+  document.body.appendChild(installPopup);
+
+  // Remove the custom pop-up after 5 seconds
+  setTimeout(() => {
+      installPopup.remove();
+  }, 2000); // Adjust time as needed
+}
 
 
 // element toggle function
