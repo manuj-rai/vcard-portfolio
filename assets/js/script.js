@@ -12,23 +12,41 @@ let deferredPrompt;
 // Listen for the install prompt event
 window.addEventListener("beforeinstallprompt", (event) => {
     console.log("beforeinstallprompt fired");
-    event.preventDefault(); // Prevent the default behavior
+    event.preventDefault(); // Prevent the default prompt
     deferredPrompt = event;
 
-    // Wait a short time after user interaction to trigger the prompt
+    // Show the custom message after a short delay (for example, 2 seconds)
+    setTimeout(() => {
+        showCustomInstallMessage();
+    }, 2000); // Change delay as needed
+});
+
+// Function to show a custom message
+function showCustomInstallMessage() {
+    const installPopup = document.createElement("div");
+    installPopup.innerHTML = `
+        <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+                    background: black; color: white; padding: 15px; border-radius: 5px;
+                    text-align: center; z-index: 1000;">
+            <p>Install our app for a better experience!</p>
+        </div>
+    `;
+    document.body.appendChild(installPopup);
+
+    // After a short delay, automatically trigger the install prompt
     setTimeout(() => {
         if (deferredPrompt) {
-            deferredPrompt.prompt(); // Show the install pop-up
+            deferredPrompt.prompt(); // Show the install prompt
             deferredPrompt.userChoice.then((choiceResult) => {
                 console.log(choiceResult.outcome === "accepted" ? 
                             "User accepted the install prompt." : 
                             "User dismissed the install prompt.");
-                deferredPrompt = null; // Reset the prompt
+                deferredPrompt = null;
+                installPopup.remove(); // Remove custom message after prompt
             });
         }
-    }, 3000); // 3 seconds delay after interaction
-});
-
+    }, 3000); // Delay before showing the prompt (3 seconds)
+}
 
 
 
