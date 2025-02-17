@@ -12,9 +12,9 @@ let deferredPrompt;
 // Listen for the install prompt event
 window.addEventListener("beforeinstallprompt", (event) => {
     console.log("beforeinstallprompt fired");
-    event.preventDefault(); // Store the event instead of showing it immediately
+    event.preventDefault(); // Store the event for later
     deferredPrompt = event;
-    event.prompt(); // Automatically show install pop-up
+    document.getElementById("installBtn").style.display = "block"; // Show install button
 });
 
 // Handle the install button click
@@ -26,10 +26,10 @@ document.getElementById("installBtn")?.addEventListener("click", () => {
                         "User accepted the install prompt." : 
                         "User dismissed the install prompt.");
             deferredPrompt = null; // Reset the prompt
+            document.getElementById("installBtn").style.display = "none"; // Hide button
         });
     }
 });
-
 
 
 
