@@ -12,24 +12,23 @@ let deferredPrompt;
 // Listen for the install prompt event
 window.addEventListener("beforeinstallprompt", (event) => {
     console.log("beforeinstallprompt fired");
-    event.preventDefault(); // Store the event for later
+    event.preventDefault(); // Prevent the default behavior
     deferredPrompt = event;
-    document.getElementById("installBtn").style.display = "block"; // Show install button
+
+    // Wait a short time after user interaction to trigger the prompt
+    setTimeout(() => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt(); // Show the install pop-up
+            deferredPrompt.userChoice.then((choiceResult) => {
+                console.log(choiceResult.outcome === "accepted" ? 
+                            "User accepted the install prompt." : 
+                            "User dismissed the install prompt.");
+                deferredPrompt = null; // Reset the prompt
+            });
+        }
+    }, 3000); // 3 seconds delay after interaction
 });
 
-// Handle the install button click
-document.getElementById("installBtn")?.addEventListener("click", () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt(); // Show the install prompt
-        deferredPrompt.userChoice.then((choiceResult) => {
-            console.log(choiceResult.outcome === "accepted" ? 
-                        "User accepted the install prompt." : 
-                        "User dismissed the install prompt.");
-            deferredPrompt = null; // Reset the prompt
-            document.getElementById("installBtn").style.display = "none"; // Hide button
-        });
-    }
-});
 
 
 
