@@ -7,6 +7,29 @@ if ('serviceWorker' in navigator) {
     .catch((error) => console.log('Service Worker Registration Failed:', error));
 }
 
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event; // Save the event for later use
+    document.getElementById("installBtn").style.display = "block"; // Show install button
+});
+
+document.getElementById("installBtn").addEventListener("click", () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+                console.log("User accepted the PWA installation.");
+            } else {
+                console.log("User dismissed the PWA installation.");
+            }
+            deferredPrompt = null;
+        });
+    }
+});
+
+
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
