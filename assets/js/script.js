@@ -15,14 +15,14 @@ window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault(); // Prevent the default prompt
     deferredPrompt = event;
 
-    // Show the custom message after a short delay (for example, 2 seconds)
-    setTimeout(() => {
-        showCustomInstallMessage();
-    }, 2000); // Change delay as needed
+    // Show the custom message after some interaction (e.g., first scroll or touch)
+    document.body.addEventListener("click", showCustomInstallMessage, { once: true });
+    document.body.addEventListener("scroll", showCustomInstallMessage, { once: true });
 });
 
 // Function to show a custom message
 function showCustomInstallMessage() {
+    // Create the custom pop-up
     const installPopup = document.createElement("div");
     installPopup.innerHTML = `
         <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -33,7 +33,7 @@ function showCustomInstallMessage() {
     `;
     document.body.appendChild(installPopup);
 
-    // After a short delay, automatically trigger the install prompt
+    // Automatically trigger the install prompt after showing the message
     setTimeout(() => {
         if (deferredPrompt) {
             deferredPrompt.prompt(); // Show the install prompt
@@ -45,7 +45,7 @@ function showCustomInstallMessage() {
                 installPopup.remove(); // Remove custom message after prompt
             });
         }
-    }, 3000); // Delay before showing the prompt (3 seconds)
+    }, 1000); // Adjust this delay as needed (1 second)
 }
 
 
