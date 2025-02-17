@@ -9,25 +9,28 @@ if ('serviceWorker' in navigator) {
 
 let deferredPrompt;
 
+// Listen for the install prompt event
 window.addEventListener("beforeinstallprompt", (event) => {
-    event.preventDefault();
-    deferredPrompt = event; // Save the event for later use
+    event.preventDefault(); // Prevent automatic prompt
+    deferredPrompt = event; // Store the event for later
     document.getElementById("installBtn").style.display = "block"; // Show install button
 });
 
+// Handle the install button click
 document.getElementById("installBtn").addEventListener("click", () => {
     if (deferredPrompt) {
-        deferredPrompt.prompt();
+        deferredPrompt.prompt(); // Show the install prompt
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === "accepted") {
-                console.log("User accepted the PWA installation.");
+                console.log("User accepted the install prompt.");
             } else {
-                console.log("User dismissed the PWA installation.");
+                console.log("User dismissed the install prompt.");
             }
-            deferredPrompt = null;
+            deferredPrompt = null; // Reset the prompt
         });
     }
 });
+
 
 
 // element toggle function
