@@ -1,6 +1,11 @@
 'use strict';
 
-
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('assets/js/service-worker.js')
+    .then(() => console.log('Service Worker Registered'))
+    .catch((error) => console.log('Service Worker Registration Failed:', error));
+}
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
