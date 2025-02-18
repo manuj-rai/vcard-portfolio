@@ -12,84 +12,36 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt;
 
 window.addEventListener("beforeinstallprompt", (event) => {
-    console.log("beforeinstallprompt fired");
-    
+    console.log("🔥 beforeinstallprompt fired");
+
     if (localStorage.getItem("installDismissed") === "true") {
         console.log("❌ Install prompt previously dismissed, skipping.");
         return;
     }
 
-    event.preventDefault();
+    event.preventDefault(); // Prevent the default banner
     deferredPrompt = event;
 
-    if (isIos()) {
-        showIosInstallMessage();
-    }
-
-    document.body.addEventListener("click", showCustomInstallMessage, { once: true });
-    document.body.addEventListener("scroll", showCustomInstallMessage, { once: true });
+    // Trigger install prompt immediately
+    showInstallPrompt();
 });
 
-function isIos() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
-
-function showCustomInstallMessage() {
+async function showInstallPrompt() {
     if (!deferredPrompt) return;
-    const installPopup = document.createElement("div");
-    installPopup.id = "installBanner";
-    installPopup.innerHTML = `
-        <p>Install our app for a better experience!</p>
-        <button id="installBtn" class="install-button">Install Now</button>
-        <button id="dismissBtn" class="install-button">Don't Show Again</button>
-    `;
-    document.body.appendChild(installPopup);
 
-    document.getElementById("installBtn").addEventListener("click", () => {
-        if (!deferredPrompt) {
-            console.log("❌ Install prompt not available.");
-            return;
-        }
-    
-        console.log("📲 Showing install prompt...");
-        deferredPrompt.prompt(); // Trigger install prompt
-    
-        const choiceResult = deferredPrompt.userChoice;
-        console.log(choiceResult.outcome === "accepted" ? "🎉 User accepted the install prompt." : "❌ User dismissed the install prompt.");
-    
-        deferredPrompt = null; // Reset the variable to prevent multiple prompts
-        document.getElementById("installBanner").remove(); // Hide the install popup
-    });
+    console.log("📲 Triggering install prompt...");
+    await deferredPrompt.prompt();
 
-    document.getElementById("dismissBtn").addEventListener("click", () => {
-        localStorage.setItem("installDismissed", "true");
-        deferredPrompt = null;
-        installPopup.remove();
-    });
-}
+    const choiceResult = await deferredPrompt.userChoice;
+    console.log(choiceResult.outcome === "accepted" ? "🎉 User accepted the install prompt." : "❌ User dismissed the install prompt.");
 
-function showIosInstallMessage() {
-    if (localStorage.getItem("installDismissed") === "true") {
-        return;
+    if (choiceResult.outcome === "dismissed") {
+        localStorage.setItem("installDismissed", "true"); // Prevent future prompts
     }
 
-    const installPopup = document.createElement("div");
-    installPopup.id = "installBanner";
-    installPopup.innerHTML = `
-        <p>To install, tap the Share button and select "Add to Home Screen".</p>
-        <button id="dismissIosBtn" class="install-button">Got it</button>
-    `;
-    document.body.appendChild(installPopup);
-
-    document.getElementById("dismissIosBtn").addEventListener("click", () => {
-        localStorage.setItem("installDismissed", "true");
-        installPopup.remove();
-    });
-
-    setTimeout(() => {
-        installPopup.remove();
-    }, 5000);
+    deferredPrompt = null; // Reset prompt to avoid multiple triggers
 }
+
 
 
 // element toggle function
