@@ -1313,11 +1313,14 @@
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <div class="error-message" id="fullnameError" style="display:none; color: red;">Full name is required.</div>
 
               <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <div class="error-message" id="emailError" style="display:none; color: red;">Please enter a valid email address.</div>
             </div>
 
             <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <div class="error-message" id="messageError" style="display:none; color: red;">Message cannot be empty.</div>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>

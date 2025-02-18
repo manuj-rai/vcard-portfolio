@@ -163,19 +163,31 @@ const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
-  });
+// Function to check individual input validity and show error messages
+function checkInputValidity(input) {
+  const errorMessage = input.nextElementSibling; // Assuming error message div is next to the input
+  if (!input.validity.valid) {
+    errorMessage.style.display = "block"; // Show error message
+  } else {
+    errorMessage.style.display = "none"; // Hide error message
+  }
 }
+
+// Add event listeners to all form input fields
+formInputs.forEach(input => {
+  input.addEventListener("input", function () {
+    // Check individual input validity and show/hide error message
+    checkInputValidity(input);
+
+    // Check overall form validity
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled"); // Enable submit button
+    } else {
+      formBtn.setAttribute("disabled", ""); // Disable submit button
+    }
+  });
+});
+
 
 // Map fullscreen toggle
 function toggleFullScreen() {
