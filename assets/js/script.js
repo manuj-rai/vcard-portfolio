@@ -14,6 +14,11 @@ let deferredPrompt;
 // Listen for the install prompt event
 window.addEventListener("beforeinstallprompt", (event) => {
     console.log("beforeinstallprompt fired");
+    
+    if (localStorage.getItem("installDismissed") === "true") {
+        return; // Don't show the prompt if user dismissed before
+    }
+
     event.preventDefault(); // Prevent the default prompt
     deferredPrompt = event;
 
@@ -29,7 +34,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 
 // Function to check if it's an iOS device
 function isIos() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 }
 
 // Function to show a custom message
@@ -37,46 +42,70 @@ function showCustomInstallMessage() {
     // Create the custom pop-up
     const installPopup = document.createElement("div");
     installPopup.innerHTML = `
-        <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-                    background: black; color: white; padding: 15px; border-radius: 5px;
-                    text-align: center; z-index: 1000;">
+        <div id="installBanner" style="position: fixed; bottom: 20px; left: 50%; 
+                    transform: translateX(-50%); background: black; color: white; 
+                    padding: 15px; border-radius: 5px; text-align: center; z-index: 1000;">
             <p>Install our app for a better experience!</p>
+            <button id="installBtn" style="margin: 5px; padding: 5px; background: green; color: white; border: none; cursor: pointer;">Install</button>
+            <button id="dismissBtn" style="margin: 5px; padding: 5px; background: red; color: white; border: none; cursor: pointer;">Don't Show Again</button>
         </div>
     `;
     document.body.appendChild(installPopup);
 
-    // Automatically trigger the install prompt after showing the message
-    setTimeout(() => {
+    // Handle Install Button
+    document.getElementById("installBtn").addEventListener("click", () => {
         if (deferredPrompt) {
             deferredPrompt.prompt(); // Show the install prompt
             deferredPrompt.userChoice.then((choiceResult) => {
                 console.log(choiceResult.outcome === "accepted" ? 
                             "User accepted the install prompt." : 
                             "User dismissed the install prompt.");
+
+                if (choiceResult.outcome === "dismissed") {
+                    localStorage.setItem("installDismissed", "true"); // Store dismissal
+                }
+                
                 deferredPrompt = null;
-                installPopup.remove(); // Remove custom message after prompt
+                installPopup.remove(); // Remove message after interaction
             });
         }
-    }, 1000); // Adjust this delay as needed (1 second)
+    });
+
+    // Handle Dismiss Button
+    document.getElementById("dismissBtn").addEventListener("click", () => {
+        localStorage.setItem("installDismissed", "true"); // Store dismissal
+        installPopup.remove(); // Remove message
+    });
 }
 
 // Function to show a custom iOS install message
 function showIosInstallMessage() {
-  const installPopup = document.createElement("div");
-  installPopup.innerHTML = `
-      <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-                  background: black; color: white; padding: 15px; border-radius: 5px;
-                  text-align: center; z-index: 1000;">
-          <p>To install this app, tap the Share button and select "Add to Home Screen".</p>
-      </div>
-  `;
-  document.body.appendChild(installPopup);
+    if (localStorage.getItem("installDismissed") === "true") {
+        return; // Don't show if user dismissed before
+    }
 
-  // Remove the custom pop-up after 5 seconds
-  setTimeout(() => {
-      installPopup.remove();
-  }, 5000); // Adjust time as needed
+    const installPopup = document.createElement("div");
+    installPopup.innerHTML = `
+        <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+                    background: black; color: white; padding: 15px; border-radius: 5px;
+                    text-align: center; z-index: 1000;">
+            <p>To install this app, tap the Share button and select "Add to Home Screen".</p>
+            <button id="dismissIosBtn" style="margin: 5px; padding: 5px; background: red; color: white; border: none; cursor: pointer;">Don't Show Again</button>
+        </div>
+    `;
+    document.body.appendChild(installPopup);
+
+    document.getElementById("dismissIosBtn").addEventListener("click", () => {
+        localStorage.setItem("installDismissed", "true"); // Store dismissal
+        installPopup.remove();
+    });
+
+    // Remove the custom pop-up after 5 seconds
+    setTimeout(() => {
+        installPopup.remove();
+    }, 5000);
 }
+
 
 
 // element toggle function
