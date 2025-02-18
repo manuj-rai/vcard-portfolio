@@ -22,8 +22,9 @@ window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault(); // Prevent the default banner
     deferredPrompt = event;
 
-    // Trigger install prompt immediately
-    showInstallPrompt();
+    // Add click and scroll listeners to trigger the install prompt
+    document.body.addEventListener("click", showInstallPrompt, { once: true });
+    document.body.addEventListener("scroll", showInstallPrompt, { once: true });
 });
 
 async function showInstallPrompt() {
