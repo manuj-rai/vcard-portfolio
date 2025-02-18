@@ -163,14 +163,18 @@ const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
-// Function to check individual input validity and show error messages
-function checkInputValidity(input) {
-  const errorMessage = input.nextElementSibling; // Assuming error message div is next to the input
-  if (!input.validity.valid) {
-    errorMessage.style.display = "block"; // Show error message
-  } else {
-    errorMessage.style.display = "none"; // Hide error message
-  }
+// add event to all form input field
+for (let i = 0; i < formInputs.length; i++) {
+  formInputs[i].addEventListener("input", function () {
+
+    // check form validation
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled");
+    } else {
+      formBtn.setAttribute("disabled", "");
+    }
+
+  });
 }
 
 // Add event listeners to all form input fields
