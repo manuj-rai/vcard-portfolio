@@ -45,16 +45,16 @@ function showCustomInstallMessage() {
     `;
     document.body.appendChild(installPopup);
 
-    document.getElementById("installBtn").addEventListener("click", async () => {
+    document.getElementById("installBtn").addEventListener("click", () => {
         if (!deferredPrompt) {
             console.log("❌ Install prompt not available.");
             return;
         }
     
         console.log("📲 Showing install prompt...");
-        await deferredPrompt.prompt(); // Trigger install prompt
+        deferredPrompt.prompt(); // Trigger install prompt
     
-        const choiceResult = await deferredPrompt.userChoice;
+        const choiceResult = deferredPrompt.userChoice;
         console.log(choiceResult.outcome === "accepted" ? "🎉 User accepted the install prompt." : "❌ User dismissed the install prompt.");
     
         deferredPrompt = null; // Reset the variable to prevent multiple prompts
