@@ -15,7 +15,8 @@ window.addEventListener("beforeinstallprompt", (event) => {
     console.log("beforeinstallprompt fired");
     
     if (localStorage.getItem("installDismissed") === "true") {
-        return; // Don't show if previously dismissed
+        console.log("❌ Install prompt previously dismissed, skipping.");
+        return;
     }
 
     event.preventDefault();
