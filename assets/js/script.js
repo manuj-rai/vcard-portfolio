@@ -34,6 +34,7 @@ function isIos() {
 }
 
 function showCustomInstallMessage() {
+    if (!deferredPrompt) return;
     const installPopup = document.createElement("div");
     installPopup.id = "installBanner";
     installPopup.innerHTML = `
@@ -44,20 +45,17 @@ function showCustomInstallMessage() {
     document.body.appendChild(installPopup);
 
     document.getElementById("installBtn").addEventListener("click", () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === "dismissed") {
-                    localStorage.setItem("installDismissed", "true");
-                }
-                deferredPrompt = null;
-                installPopup.remove();
-            });
-        }
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            console.log(choiceResult.outcome === "accepted" ? "🎉 User accepted the install prompt." : "❌ User dismissed the install prompt.");
+            deferredPrompt = null;
+            installPopup.remove();
+        });
     });
 
     document.getElementById("dismissBtn").addEventListener("click", () => {
         localStorage.setItem("installDismissed", "true");
+        deferredPrompt = null;
         installPopup.remove();
     });
 }
