@@ -299,3 +299,78 @@ blogItems.forEach(item => {
 // Close modal when close button or overlay is clicked
 blogModalCloseBtn.addEventListener("click", toggleBlogModal);
 blogOverlay.addEventListener("click", toggleBlogModal);
+
+//skills
+const carousel = document.getElementById('skillsCarousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const skillCards = document.querySelectorAll('.skill-card');
+
+    // Carousel navigation
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+
+    // Category filtering
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        
+        // Update active button
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards
+        skillCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Reset scroll
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Auto-scroll on mouse wheel
+    carousel.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      carousel.scrollBy({ left: e.deltaY < 0 ? -220 : 220, behavior: 'smooth' });
+    });
+
+    // Touch/drag scroll
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      carousel.style.cursor = 'grabbing';
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      isDown = false;
+      carousel.style.cursor = 'grab';
+    });
+
+    carousel.addEventListener('mouseup', () => {
+      isDown = false;
+      carousel.style.cursor = 'grab';
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 2;
+      carousel.scrollLeft = scrollLeft - walk;
+    });

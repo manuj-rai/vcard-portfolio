@@ -60,7 +60,10 @@
         "https://in.pinterest.com/manuj_rai_official"
       ]
     }
-    </script>
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </head>
 
 
@@ -195,10 +198,6 @@
 
     </aside>
 
-
-
-
-
     <!--
       - #main-content
     -->
@@ -236,10 +235,6 @@
         </ul>
 
       </nav>
-
-
-
-
 
       <!--
         - #ABOUT
@@ -554,10 +549,6 @@
 
       </article>
 
-
-
-
-
       <!--
         - #RESUME
       -->
@@ -660,72 +651,187 @@
         </section>
 
         <section class="skill">
+          <h3 class="h3 skills-title">Technical Skills</h3>
 
-          <h3 class="h3 skills-title">My skills</h3>
+          <div class="skill-categories">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="frontend">Frontend</button>
+            <button class="category-btn" data-category="backend">Backend</button>
+            <button class="category-btn" data-category="tools">Tools</button>
+          </div>
 
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Angular</h5>
-                <data value="90">90%</data>
+          <div class="skills-carousel-wrapper">
+            <div class="skills-carousel" id="skillsCarousel">
+              <!-- Frontend Skills -->
+              <div class="skill-card" data-category="frontend">
+                <div class="skill-icon">
+                  <ion-icon name="logo-angular"></ion-icon>
+                </div>
+                <div class="skill-name">Angular</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 90%"></div>
+                </div>
               </div>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
+              <div class="skill-card" data-category="frontend">
+                <div class="skill-icon">
+                  <ion-icon name="logo-react"></ion-icon>
+                </div>
+                <div class="skill-name">React</div>
+                <div class="skill-level">Advanced</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 85%"></div>
+                </div>
               </div>
 
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">.Net</h5>
-                <data value="80">80%</data>
+              <div class="skill-card" data-category="frontend">
+                <div class="skill-icon">
+                  <ion-icon name="logo-html5"></ion-icon>
+                </div>
+                <div class="skill-name">HTML5</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 95%"></div>
+                </div>
               </div>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
+              <div class="skill-card" data-category="frontend">
+                <div class="skill-icon">
+                  <ion-icon name="logo-css3"></ion-icon>
+                </div>
+                <div class="skill-name">CSS3</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 92%"></div>
+                </div>
               </div>
 
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">SQL</h5>
-                <data value="90">90%</data>
+              <div class="skill-card" data-category="frontend">
+                <div class="skill-icon">
+                  <ion-icon name="logo-javascript"></ion-icon>
+                </div>
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 90%"></div>
+                </div>
               </div>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
+              <!-- Backend Skills -->
+              <div class="skill-card" data-category="backend">
+                <div class="skill-icon">
+                  <ion-icon name="server-outline"></ion-icon>
+                </div>
+                <div class="skill-name">.NET</div>
+                <div class="skill-level">Advanced</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 80%"></div>
+                </div>
               </div>
 
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Communication</h5>
-                <data value="85">85%</data>
+              <div class="skill-card" data-category="backend">
+                <div class="skill-icon">
+                  <ion-icon name="logo-nodejs"></ion-icon>
+                </div>
+                <div class="skill-name">Node.js</div>
+                <div class="skill-level">Advanced</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 82%"></div>
+                </div>
               </div>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 85%;"></div>
+              <div class="skill-card" data-category="backend">
+                <div class="skill-icon">
+                  <ion-icon name="analytics-outline"></ion-icon>
+                </div>
+                <div class="skill-name">SQL</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 90%"></div>
+                </div>
               </div>
 
-            </li>
+              <div class="skill-card" data-category="backend">
+                <div class="skill-icon">
+                  <ion-icon name="flame-outline"></ion-icon>
+                </div>
+                <div class="skill-name">REST API</div>
+                <div class="skill-level">Advanced</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 88%"></div>
+                </div>
+              </div>
 
-          </ul>
+              <!-- Tools -->
+              <div class="skill-card" data-category="tools">
+                <div class="skill-icon">
+                  <ion-icon name="logo-github"></ion-icon>
+                </div>
+                <div class="skill-name">Git</div>
+                <div class="skill-level">Advanced</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 85%"></div>
+                </div>
+              </div>
 
+              <div class="skill-card" data-category="tools">
+                <div class="skill-icon">
+                  <ion-icon name="cube-outline"></ion-icon>
+                </div>
+                <div class="skill-name">Docker</div>
+                <div class="skill-level">Intermediate</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 70%"></div>
+                </div>
+              </div>
+
+              <div class="skill-card" data-category="tools">
+                <div class="skill-icon">
+                  <ion-icon name="terminal-outline"></ion-icon>
+                </div>
+                <div class="skill-name">VS Code</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 95%"></div>
+                </div>
+              </div>
+
+              <div class="skill-card" data-category="frontend">
+                <div class="skill-icon">
+                  <ion-icon name="color-palette-outline"></ion-icon>
+                </div>
+                <div class="skill-name">UI/UX Design</div>
+                <div class="skill-level">Advanced</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 80%"></div>
+                </div>
+              </div>
+
+              <div class="skill-card" data-category="backend">
+                <div class="skill-icon">
+                  <ion-icon name="people-outline"></ion-icon>
+                </div>
+                <div class="skill-name">Teamwork</div>
+                <div class="skill-level">Expert</div>
+                <div class="skill-progress">
+                  <div class="skill-progress-fill" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="prevBtn">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </button>
+            <button class="carousel-btn" id="nextBtn">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+          </div>
         </section>
 
       </article>
-
-
-
-
 
       <!--
         - #PORTFOLIO
@@ -973,79 +1079,7 @@
                 <p class="project-category">Personal Portfolio</p>
 
               </a>
-            </li>
-
-            <!-- <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
-                </figure>
-
-                <h3 class="project-title">DSM.</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li> -->
-
-            <!-- <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">MetaSpark</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li> -->
-
-            <!-- <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Summary</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li> -->
-
-            <!-- <li class="project-item  active" data-filter-item data-category="personal portfolio"> -->
-              <!-- <a href="https://manuj-rai.github.io/Portfolio/"> -->
-
-                <!-- <figure class="project-img"> -->
-                  <!-- <div class="project-item-icon-box"> -->
-                    <!-- <ion-icon name="eye-outline"></ion-icon> -->
-                  <!-- </div> -->
-
-                  <!-- <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy"> -->
-                <!-- </figure> -->
-
-                <!-- <h3 class="project-title">Simple</h3> -->
-
-                <!-- <p class="project-category">Personal Portfolio</p> -->
-
-              <!-- </a> -->
-            <!-- </li> -->
+            </li>            
 
             <li class="project-item  active" data-filter-item data-category="web development">
               <a href="https://manuj-rai.github.io/admin-dashboard/">
@@ -1064,35 +1098,11 @@
 
               </a>
             </li>
-
-
-            <!-- <li class="project-item  active" data-filter-item data-category="web development"> -->
-              <!-- <a href="https://e-commerce-angular-tailwind.vercel.app/"> -->
-
-                <!-- <figure class="project-img"> -->
-                  <!-- <div class="project-item-icon-box"> -->
-                    <!-- <ion-icon name="eye-outline"></ion-icon> -->
-                  <!-- </div> -->
-
-                  <!-- <img src="./assets/images/project-10.png" alt="orizon" loading="lazy"> -->
-                <!-- </figure> -->
-
-                <!-- <h3 class="project-title">E-Commerce</h3> -->
-
-                <!-- <p class="project-category">Web development</p> -->
-
-              <!-- </a> -->
-            <!-- </li> -->
-
           </ul>
 
         </section>
 
       </article>
-
-
-
-
 
       <!--
         - #BLOG
@@ -1211,119 +1221,7 @@
                 </div>
 
               </a>
-            </li>
-
-            <!-- <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #80</h3>
-
-                  <p class="blog-text">
-                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                  </p>
-
-                </div>
-
-              </a>
-            </li> -->
-
-            <!-- <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
-
-                  <p class="blog-text">
-                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li> -->
-
-            <!-- <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                  <p class="blog-text">
-                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                </div>
-
-              </a>
-            </li> -->
-
-            <!-- <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                  </p>
-
-                </div>
-
-              </a>
-            </li> -->
+            </li>   
 
           </ul>
 
