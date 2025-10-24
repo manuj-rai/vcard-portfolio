@@ -1,10 +1,28 @@
 'use strict';
 
+// Register service worker with error handling and offline support
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('assets/js/service-worker.js')
-    .then(() => console.log('Service Worker Registered'))
-    .catch((error) => console.log('Service Worker Registration Failed:', error));
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('assets/js/service-worker.js');
+      console.log('ServiceWorker registration successful:', registration.scope);
+      
+      // Handle updates
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // New content is available
+            if (confirm('New version available! Would you like to update?')) {
+              window.location.reload();
+            }
+          }
+        });
+      });
+    } catch (error) {
+      console.error('ServiceWorker registration failed:', error);
+    }
+  });
 }
 
 
@@ -177,19 +195,15 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-// Add event listeners to all form input fields
-formInputs.forEach(input => {
-  input.addEventListener("input", function () {
+// Add event listeners to all form input fields using a single delegated event listener
+form.addEventListener("input", (e) => {
+  if (e.target.matches("[data-form-input]")) {
     // Check individual input validity and show/hide error message
-    checkInputValidity(input);
+    checkInputValidity(e.target);
 
     // Check overall form validity
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled"); // Enable submit button
-    } else {
-      formBtn.setAttribute("disabled", ""); // Disable submit button
-    }
-  });
+    formBtn.toggleAttribute("disabled", !form.checkValidity());
+  }
 });
 
 
@@ -345,32 +359,63 @@ const carousel = document.getElementById('skillsCarousel');
       carousel.scrollBy({ left: e.deltaY < 0 ? -220 : 220, behavior: 'smooth' });
     });
 
-    // Touch/drag scroll
+    // Enhanced touch/drag scroll with touch device support
     let isDown = false;
     let startX;
     let scrollLeft;
+    let momentumID;
+    let velocity = 0;
+    let lastPageX = 0;
 
-    carousel.addEventListener('mousedown', (e) => {
-      isDown = true;
-      carousel.style.cursor = 'grabbing';
-      startX = e.pageX - carousel.offsetLeft;
-      scrollLeft = carousel.scrollLeft;
-    });
+    function startDragging(e) {
+        isDown = true;
+        carousel.style.cursor = 'grabbing';
+        carousel.style.scrollBehavior = 'auto';
+        startX = (e.pageX || e.touches[0].pageX) - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+        lastPageX = e.pageX || e.touches[0].pageX;
+        
+        // Clear any existing momentum scrolling
+        cancelAnimationFrame(momentumID);
+    }
 
-    carousel.addEventListener('mouseleave', () => {
-      isDown = false;
-      carousel.style.cursor = 'grab';
-    });
+    function stopDragging() {
+        if (!isDown) return;
+        isDown = false;
+        carousel.style.cursor = 'grab';
+        carousel.style.scrollBehavior = 'smooth';
+        
+        // Apply momentum
+        const momentumScroll = () => {
+            if (Math.abs(velocity) > 0.1) {
+                carousel.scrollLeft += velocity;
+                velocity *= 0.95; // Decay factor
+                momentumID = requestAnimationFrame(momentumScroll);
+            }
+        };
+        momentumScroll();
+    }
 
-    carousel.addEventListener('mouseup', () => {
-      isDown = false;
-      carousel.style.cursor = 'grab';
-    });
+    function dragging(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = (e.pageX || e.touches[0].pageX) - carousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        carousel.scrollLeft = scrollLeft - walk;
+        
+        // Calculate velocity
+        const currentPageX = e.pageX || e.touches[0].pageX;
+        velocity = (lastPageX - currentPageX) * 0.5;
+        lastPageX = currentPageX;
+    }
 
-    carousel.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 2;
-      carousel.scrollLeft = scrollLeft - walk;
-    });
+    // Mouse events
+    carousel.addEventListener('mousedown', startDragging);
+    carousel.addEventListener('mouseleave', stopDragging);
+    carousel.addEventListener('mouseup', stopDragging);
+    carousel.addEventListener('mousemove', dragging);
+
+    // Touch events
+    carousel.addEventListener('touchstart', startDragging);
+    carousel.addEventListener('touchend', stopDragging);
+    carousel.addEventListener('touchmove', dragging);

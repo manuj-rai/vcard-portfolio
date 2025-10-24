@@ -42,7 +42,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" as="style">
+  <link rel="preload" as="script" href="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
+  <link rel="preload" as="script" href="./assets/js/script.js">
   <link rel="manifest" href="/assets/js/manifest.json">
+  
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="./assets/images/my-avatar.png" type="image/png">
+  <link rel="preload" fetchpriority="high" as="image" href="./assets/images/vcard-portfolio.png" type="image/png">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -900,6 +906,24 @@
           </div>
 
           <ul class="project-list">
+
+            <li class="project-item  active" data-filter-item data-category="Web development">
+              <a href="https://nova-cart-olive.vercel.app/">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/image.png" alt="drop-shipping" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">React Drop-Shipping</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
 
             <li class="project-item  active" data-filter-item data-category="personal portfolio">
               <a href="https://manuj-react-portfolio.vercel.app/">
