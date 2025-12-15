@@ -1,9 +1,1 @@
-{
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://manuj-rai.vercel.app/:path*",
-      "permanent": true
-    }
-  ]
-}
+
